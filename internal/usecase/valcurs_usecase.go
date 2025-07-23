@@ -27,7 +27,14 @@ func (uc *valCursUseCase) GetByDateAndName(ctx context.Context, date string, nam
 	if uc.repository == nil {
 		return nil, errors.New("ValCursUseCase.GetByDate(): Nil pointer repository")
 	}
-	return uc.repository.GetByDateAndName(ctx, date, name)
+	item, err := uc.repository.GetByDateAndName(ctx, date, name)
+
+	// СПОРНЫЙ МОМЕНТ. т.к. в доп условиях написано про уникальность данных/ответов, предполгается что все
+	// данные будут загружаться по gRPC перед проверкой. поэтому удаляем обьект из бд по нахождению
+	if item != nil {
+		err = uc.repository.DeleteByDateAndName(ctx, date, name)
+	}
+	return item, err
 }
 
 func (uc *valCursUseCase) Insert(ctx context.Context, item *entity.ValuteCurs) (id string, err error) {

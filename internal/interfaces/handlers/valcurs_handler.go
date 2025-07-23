@@ -48,6 +48,7 @@ func (h *valCursHandler) GetByDateAndName(c *gin.Context) {
 	if date == "" {
 		date = time.Now().Format("02.01.2006")
 	}
+	c.ClientIP()
 	_, err := time.Parse("02.01.2006", date)
 	if err != nil {
 		err = fmt.Errorf("valCursHandler.GetByDateAndName()/%w", err)
