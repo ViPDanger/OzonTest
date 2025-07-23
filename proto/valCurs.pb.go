@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v3.21.12
-// source: internal/proto/valCurs.proto
+// source: proto/valCurs.proto
 
 package proto
 
@@ -33,7 +33,7 @@ type ValCurs struct {
 
 func (x *ValCurs) Reset() {
 	*x = ValCurs{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[0]
+	mi := &file_proto_valCurs_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +45,7 @@ func (x *ValCurs) String() string {
 func (*ValCurs) ProtoMessage() {}
 
 func (x *ValCurs) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[0]
+	mi := &file_proto_valCurs_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *ValCurs) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValCurs.ProtoReflect.Descriptor instead.
 func (*ValCurs) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{0}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ValCurs) GetDate() string {
@@ -98,7 +98,7 @@ type Valute struct {
 
 func (x *Valute) Reset() {
 	*x = Valute{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[1]
+	mi := &file_proto_valCurs_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -110,7 +110,7 @@ func (x *Valute) String() string {
 func (*Valute) ProtoMessage() {}
 
 func (x *Valute) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[1]
+	mi := &file_proto_valCurs_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -123,7 +123,7 @@ func (x *Valute) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Valute.ProtoReflect.Descriptor instead.
 func (*Valute) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{1}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Valute) GetId() string {
@@ -185,7 +185,7 @@ type AddValCursRequest struct {
 
 func (x *AddValCursRequest) Reset() {
 	*x = AddValCursRequest{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[2]
+	mi := &file_proto_valCurs_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -197,7 +197,7 @@ func (x *AddValCursRequest) String() string {
 func (*AddValCursRequest) ProtoMessage() {}
 
 func (x *AddValCursRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[2]
+	mi := &file_proto_valCurs_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -210,7 +210,7 @@ func (x *AddValCursRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddValCursRequest.ProtoReflect.Descriptor instead.
 func (*AddValCursRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{2}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddValCursRequest) GetValCurs() *ValCurs {
@@ -229,7 +229,7 @@ type AddValCursResponse struct {
 
 func (x *AddValCursResponse) Reset() {
 	*x = AddValCursResponse{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[3]
+	mi := &file_proto_valCurs_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -241,7 +241,7 @@ func (x *AddValCursResponse) String() string {
 func (*AddValCursResponse) ProtoMessage() {}
 
 func (x *AddValCursResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[3]
+	mi := &file_proto_valCurs_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +254,7 @@ func (x *AddValCursResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddValCursResponse.ProtoReflect.Descriptor instead.
 func (*AddValCursResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{3}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AddValCursResponse) GetMessage() string {
@@ -275,7 +275,7 @@ type SetStateRequest struct {
 
 func (x *SetStateRequest) Reset() {
 	*x = SetStateRequest{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[4]
+	mi := &file_proto_valCurs_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -287,7 +287,7 @@ func (x *SetStateRequest) String() string {
 func (*SetStateRequest) ProtoMessage() {}
 
 func (x *SetStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[4]
+	mi := &file_proto_valCurs_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -300,7 +300,7 @@ func (x *SetStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetStateRequest.ProtoReflect.Descriptor instead.
 func (*SetStateRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{4}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SetStateRequest) GetDate() string {
@@ -326,7 +326,7 @@ type SetStateResponse struct {
 
 func (x *SetStateResponse) Reset() {
 	*x = SetStateResponse{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[5]
+	mi := &file_proto_valCurs_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -338,7 +338,7 @@ func (x *SetStateResponse) String() string {
 func (*SetStateResponse) ProtoMessage() {}
 
 func (x *SetStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[5]
+	mi := &file_proto_valCurs_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -351,7 +351,7 @@ func (x *SetStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetStateResponse.ProtoReflect.Descriptor instead.
 func (*SetStateResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{5}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SetStateResponse) GetMessage() string {
@@ -372,7 +372,7 @@ type DeleteValCursRequest struct {
 
 func (x *DeleteValCursRequest) Reset() {
 	*x = DeleteValCursRequest{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[6]
+	mi := &file_proto_valCurs_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -384,7 +384,7 @@ func (x *DeleteValCursRequest) String() string {
 func (*DeleteValCursRequest) ProtoMessage() {}
 
 func (x *DeleteValCursRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[6]
+	mi := &file_proto_valCurs_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -397,7 +397,7 @@ func (x *DeleteValCursRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteValCursRequest.ProtoReflect.Descriptor instead.
 func (*DeleteValCursRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{6}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteValCursRequest) GetDate() string {
@@ -423,7 +423,7 @@ type DeleteValCursResponse struct {
 
 func (x *DeleteValCursResponse) Reset() {
 	*x = DeleteValCursResponse{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[7]
+	mi := &file_proto_valCurs_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +435,7 @@ func (x *DeleteValCursResponse) String() string {
 func (*DeleteValCursResponse) ProtoMessage() {}
 
 func (x *DeleteValCursResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[7]
+	mi := &file_proto_valCurs_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +448,7 @@ func (x *DeleteValCursResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteValCursResponse.ProtoReflect.Descriptor instead.
 func (*DeleteValCursResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{7}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteValCursResponse) GetMessage() string {
@@ -468,7 +468,7 @@ type GetStateRequest struct {
 
 func (x *GetStateRequest) Reset() {
 	*x = GetStateRequest{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[8]
+	mi := &file_proto_valCurs_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -480,7 +480,7 @@ func (x *GetStateRequest) String() string {
 func (*GetStateRequest) ProtoMessage() {}
 
 func (x *GetStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[8]
+	mi := &file_proto_valCurs_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -493,7 +493,7 @@ func (x *GetStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStateRequest.ProtoReflect.Descriptor instead.
 func (*GetStateRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{8}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetStateRequest) GetMessage() string {
@@ -512,7 +512,7 @@ type GetStateResponse struct {
 
 func (x *GetStateResponse) Reset() {
 	*x = GetStateResponse{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[9]
+	mi := &file_proto_valCurs_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -524,7 +524,7 @@ func (x *GetStateResponse) String() string {
 func (*GetStateResponse) ProtoMessage() {}
 
 func (x *GetStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[9]
+	mi := &file_proto_valCurs_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -537,7 +537,7 @@ func (x *GetStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStateResponse.ProtoReflect.Descriptor instead.
 func (*GetStateResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{9}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetStateResponse) GetMessage() string {
@@ -556,7 +556,7 @@ type ResetRequest struct {
 
 func (x *ResetRequest) Reset() {
 	*x = ResetRequest{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[10]
+	mi := &file_proto_valCurs_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -568,7 +568,7 @@ func (x *ResetRequest) String() string {
 func (*ResetRequest) ProtoMessage() {}
 
 func (x *ResetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[10]
+	mi := &file_proto_valCurs_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,7 +581,7 @@ func (x *ResetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetRequest.ProtoReflect.Descriptor instead.
 func (*ResetRequest) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{10}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{10}
 }
 
 type ResetResponse struct {
@@ -593,7 +593,7 @@ type ResetResponse struct {
 
 func (x *ResetResponse) Reset() {
 	*x = ResetResponse{}
-	mi := &file_internal_proto_valCurs_proto_msgTypes[11]
+	mi := &file_proto_valCurs_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -605,7 +605,7 @@ func (x *ResetResponse) String() string {
 func (*ResetResponse) ProtoMessage() {}
 
 func (x *ResetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_proto_valCurs_proto_msgTypes[11]
+	mi := &file_proto_valCurs_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -618,7 +618,7 @@ func (x *ResetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetResponse.ProtoReflect.Descriptor instead.
 func (*ResetResponse) Descriptor() ([]byte, []int) {
-	return file_internal_proto_valCurs_proto_rawDescGZIP(), []int{11}
+	return file_proto_valCurs_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ResetResponse) GetMessage() string {
@@ -628,11 +628,11 @@ func (x *ResetResponse) GetMessage() string {
 	return ""
 }
 
-var File_internal_proto_valCurs_proto protoreflect.FileDescriptor
+var File_proto_valCurs_proto protoreflect.FileDescriptor
 
-const file_internal_proto_valCurs_proto_rawDesc = "" +
+const file_proto_valCurs_proto_rawDesc = "" +
 	"\n" +
-	"\x1cinternal/proto/valCurs.proto\x12\aValCurs\"\\\n" +
+	"\x13proto/valCurs.proto\x12\aValCurs\"\\\n" +
 	"\aValCurs\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12)\n" +
@@ -673,22 +673,22 @@ const file_internal_proto_valCurs_proto_rawDesc = "" +
 	"\rDeleteValCurs\x12\x1d.ValCurs.DeleteValCursRequest\x1a\x1e.ValCurs.DeleteValCursResponse\x12?\n" +
 	"\bSetState\x12\x18.ValCurs.SetStateRequest\x1a\x19.ValCurs.SetStateResponse\x12?\n" +
 	"\bGetState\x12\x18.ValCurs.GetStateRequest\x1a\x19.ValCurs.GetStateResponse\x126\n" +
-	"\x05Reset\x12\x15.ValCurs.ResetRequest\x1a\x16.ValCurs.ResetResponseB\x18Z\x16./internal/proto;protob\x06proto3"
+	"\x05Reset\x12\x15.ValCurs.ResetRequest\x1a\x16.ValCurs.ResetResponseB\x0fZ\r./proto;protob\x06proto3"
 
 var (
-	file_internal_proto_valCurs_proto_rawDescOnce sync.Once
-	file_internal_proto_valCurs_proto_rawDescData []byte
+	file_proto_valCurs_proto_rawDescOnce sync.Once
+	file_proto_valCurs_proto_rawDescData []byte
 )
 
-func file_internal_proto_valCurs_proto_rawDescGZIP() []byte {
-	file_internal_proto_valCurs_proto_rawDescOnce.Do(func() {
-		file_internal_proto_valCurs_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_internal_proto_valCurs_proto_rawDesc), len(file_internal_proto_valCurs_proto_rawDesc)))
+func file_proto_valCurs_proto_rawDescGZIP() []byte {
+	file_proto_valCurs_proto_rawDescOnce.Do(func() {
+		file_proto_valCurs_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_valCurs_proto_rawDesc), len(file_proto_valCurs_proto_rawDesc)))
 	})
-	return file_internal_proto_valCurs_proto_rawDescData
+	return file_proto_valCurs_proto_rawDescData
 }
 
-var file_internal_proto_valCurs_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
-var file_internal_proto_valCurs_proto_goTypes = []any{
+var file_proto_valCurs_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_proto_valCurs_proto_goTypes = []any{
 	(*ValCurs)(nil),               // 0: ValCurs.ValCurs
 	(*Valute)(nil),                // 1: ValCurs.Valute
 	(*AddValCursRequest)(nil),     // 2: ValCurs.AddValCursRequest
@@ -702,7 +702,7 @@ var file_internal_proto_valCurs_proto_goTypes = []any{
 	(*ResetRequest)(nil),          // 10: ValCurs.ResetRequest
 	(*ResetResponse)(nil),         // 11: ValCurs.ResetResponse
 }
-var file_internal_proto_valCurs_proto_depIdxs = []int32{
+var file_proto_valCurs_proto_depIdxs = []int32{
 	1,  // 0: ValCurs.ValCurs.valutes:type_name -> ValCurs.Valute
 	0,  // 1: ValCurs.AddValCursRequest.valCurs:type_name -> ValCurs.ValCurs
 	2,  // 2: ValCurs.MockXMLDaily.AddValCurs:input_type -> ValCurs.AddValCursRequest
@@ -722,26 +722,26 @@ var file_internal_proto_valCurs_proto_depIdxs = []int32{
 	0,  // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_internal_proto_valCurs_proto_init() }
-func file_internal_proto_valCurs_proto_init() {
-	if File_internal_proto_valCurs_proto != nil {
+func init() { file_proto_valCurs_proto_init() }
+func file_proto_valCurs_proto_init() {
+	if File_proto_valCurs_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_proto_valCurs_proto_rawDesc), len(file_internal_proto_valCurs_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_valCurs_proto_rawDesc), len(file_proto_valCurs_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_internal_proto_valCurs_proto_goTypes,
-		DependencyIndexes: file_internal_proto_valCurs_proto_depIdxs,
-		MessageInfos:      file_internal_proto_valCurs_proto_msgTypes,
+		GoTypes:           file_proto_valCurs_proto_goTypes,
+		DependencyIndexes: file_proto_valCurs_proto_depIdxs,
+		MessageInfos:      file_proto_valCurs_proto_msgTypes,
 	}.Build()
-	File_internal_proto_valCurs_proto = out.File
-	file_internal_proto_valCurs_proto_goTypes = nil
-	file_internal_proto_valCurs_proto_depIdxs = nil
+	File_proto_valCurs_proto = out.File
+	file_proto_valCurs_proto_goTypes = nil
+	file_proto_valCurs_proto_depIdxs = nil
 }

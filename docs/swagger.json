@@ -8,7 +8,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Мок-сервис получения курсов валют с сайта cbr.ru в XML-формате.",
-        "title": "OzonTest",
+        "title": "MockXMLDaily",
         "contact": {},
         "version": "1.0"
     },

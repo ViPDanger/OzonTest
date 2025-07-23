@@ -39,9 +39,10 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGALRM)
 	defer func() {
 		cancel()
-		time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 		fmt.Println("Greatefull shutdown")
 	}()
+	// Запускк приложения
 	_, err := app.Run(ctx, host, mongoURI, mongodbName, mongoUser, mongoPassword, grpcHost)
 	if err != nil {
 		fmt.Printf("main(): error to run app.Run() %v\n", err.Error())

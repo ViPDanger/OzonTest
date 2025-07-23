@@ -19,7 +19,7 @@ type ValCursHandler interface {
 }
 
 func NewValCursHandler(uc usecase.ValCursUseCase) ValCursHandler {
-	return &valCursHandler{uc: uc, HandlerState: &HandlerState{date: time.Now().Format("02.01.2006")}}
+	return &valCursHandler{uc: uc, HandlerState: &HandlerState{date: time.Now().Format("02.01.2006"), name: "Foreign Currency Market"}}
 }
 
 type valCursHandler struct {
@@ -31,8 +31,6 @@ type valCursHandler struct {
 // @Summary      Получить валютные курсы по дате и имени источника
 // @Description  Возвращает XML-список валют на заданную дату и по заданному имени источника. Дата и имя берутся из внутреннего состояния, которое можно изменить через gRPC SetState.
 // @Tags         currency
-// @Param		 date string false "Дата запроса (формат 02.01.2006)" default(02.01.2006)
-// @Param        name string false "Имя источника (например: Foreign Currency Market)" default("Foreign Currency Market")
 // @Produce      xml
 // @Success      200 {object} dto.ValCursDTO
 // @Failure      500 {object} map[string]string "Ошибка запроса"
@@ -76,8 +74,8 @@ func (h *valCursHandler) GetByDateAndName(c *gin.Context) {
 
 type HandlerState struct {
 	sync.Mutex
-	date string
-	name string
+	date string //	default(time.Now() date)
+	name string //	default("Foreign Currency Market")
 }
 
 // Функция установки состояния handler
