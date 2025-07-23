@@ -14,12 +14,12 @@ import (
 
 type ValCursHandler interface {
 	GetByDateAndName(c *gin.Context)
-	SetState(date string, name string)
-	GetState() (date string, name string)
+	SetState(id string, date string, name string)
+	GetState(id string) (date string, name string)
 }
 
 func NewValCursHandler(uc usecase.ValCursUseCase) ValCursHandler {
-	return &valCursHandler{uc: uc, HandlerState: &HandlerState{date: time.Now().Format("02.01.2006"), name: "Foreign Currency Market"}}
+	return &valCursHandler{uc: uc, HandlerState: &HandlerState{}}
 }
 
 type valCursHandler struct {
@@ -43,12 +43,11 @@ func (h *valCursHandler) GetByDateAndName(c *gin.Context) {
 		c.XML(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	// берём date, name из состояния handler
-	date, name := h.GetState()
+	// берём date, name из состояния handler от ClientIP
+	date, name := h.GetState(c.ClientIP())
 	if date == "" {
 		date = time.Now().Format("02.01.2006")
 	}
-	c.ClientIP()
 	_, err := time.Parse("02.01.2006", date)
 	if err != nil {
 		err = fmt.Errorf("valCursHandler.GetByDateAndName()/%w", err)
@@ -56,8 +55,9 @@ func (h *valCursHandler) GetByDateAndName(c *gin.Context) {
 		c.XML(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
 	// обращение к Usecase
-	object, err := h.uc.GetByDateAndName(c.Request.Context(), date, name)
+	object, err := h.uc.GetByDateAndName(c.Request.Context(), c.ClientIP(), date, name)
 	if err != nil {
 		err = fmt.Errorf("valCursHandler.GetByDateAndName()/%w", err)
 		_ = c.Error(err)
@@ -75,14 +75,16 @@ func (h *valCursHandler) GetByDateAndName(c *gin.Context) {
 
 type HandlerState struct {
 	sync.Mutex
+	m    sync.Map
 	date string //	default(time.Now() date)
 	name string //	default("Foreign Currency Market")
 }
 
 // Функция установки состояния handler
-func (h *HandlerState) SetState(date string, name string) {
+func (h *HandlerState) SetState(id string, date string, name string) {
 	h.Mutex.Lock()
 	defer h.Mutex.Unlock()
+	h.m.Store(id, []string{date, name})
 	_, err := time.Parse("02.01.2006", date)
 	if err != nil {
 		return
@@ -92,8 +94,11 @@ func (h *HandlerState) SetState(date string, name string) {
 }
 
 // Функция просмотра состояния handler
-func (h *HandlerState) GetState() (date string, name string) {
+func (h *HandlerState) GetState(id string) (date string, name string) {
 	h.Mutex.Lock()
 	defer h.Mutex.Unlock()
-	return h.date, h.name
+	if str, ok := h.m.Load(id); ok {
+		return str.([]string)[0], str.([]string)[1]
+	}
+	return time.Now().Format("02.01.2006"), "Foreign Currency Market"
 }

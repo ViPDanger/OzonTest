@@ -1,9 +1,10 @@
 package entity
 
 type ValuteCurs struct {
-	Date    string
-	Name    string
-	Valutes []Valute
+	CreatorID string
+	Date      string
+	Name      string
+	Valutes   []Valute
 }
 
 type Valute struct {
