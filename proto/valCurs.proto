@@ -26,7 +26,7 @@ message ValCurs {
   repeated Valute valutes = 3;
 }
 
-// Val8ute
+// Valute
 message Valute {
   string id = 1;
   int32 num_code = 2;
@@ -50,8 +50,8 @@ message AddValCursResponse {
 
 // SetState
 message SetStateRequest {
-  string date = 1;
-  string name = 2;
+  string date = 2;
+  string name = 3;
 }
 
 message SetStateResponse {
@@ -62,8 +62,8 @@ message SetStateResponse {
 
 // DeleteValCurs
 message DeleteValCursRequest {
-  string date = 1;
-  string name = 2;
+  string date = 2;
+  string name = 3;
 }
 
 message DeleteValCursResponse {
@@ -71,9 +71,7 @@ message DeleteValCursResponse {
 }
 
 // GetState
-message GetStateRequest {
-  string message = 1;
-}
+message GetStateRequest {}
 message GetStateResponse {
   string message = 1;
 }

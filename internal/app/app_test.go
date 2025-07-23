@@ -1,13 +1,11 @@
 package app_test
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
-	"net/http/httptest"
 	"os"
 	"os/signal"
 	"syscall"
@@ -59,11 +57,9 @@ func TestOK(t *testing.T) {
 	_, _ = grpcClient.Reset(ctx, &proto.ResetRequest{})                                                           // Очистить бд
 	_, _ = grpcClient.AddValCurs(ctx, &proto.AddValCursRequest{ValCurs: &testValCurs[0]})                         // Добавить значение в бд
 	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[0].Date, Name: testValCurs[0].Name}) // Установить HandlerState
-	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "http://"+host+"/", bytes.NewBuffer([]byte{}))
-	app.GetGinServer().Handler.ServeHTTP(w, req)
-	body, _ := io.ReadAll(w.Body)
-	assert.Equal(t, w.Code, http.StatusOK, string(body))
+	resp, _ := http.Get("http://" + host + "/")
+	body, _ := io.ReadAll(resp.Body)
+	assert.Equal(t, resp.StatusCode, http.StatusOK, string(body))
 }
 
 // Тест должен вывести StatusInternalServerError
@@ -75,11 +71,9 @@ func TestInternalServerError(t *testing.T) {
 		t.Error("Nil Pointer gin server or gRPC client")
 	}
 	_, _ = grpcClient.Reset(ctx, &proto.ResetRequest{}) // Очистить БД
-	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "http://"+host+"/", bytes.NewBuffer([]byte{}))
-	app.GetGinServer().Handler.ServeHTTP(w, req)
-	body, _ := io.ReadAll(w.Body)
-	assert.Equal(t, w.Code, http.StatusInternalServerError, string(body))
+	resp, _ := http.Get("http://" + host + "/")
+	body, _ := io.ReadAll(resp.Body)
+	assert.Equal(t, resp.StatusCode, http.StatusInternalServerError, string(body))
 }
 
 func TestSwitchState(t *testing.T) {
@@ -94,18 +88,14 @@ func TestSwitchState(t *testing.T) {
 	_, _ = grpcClient.AddValCurs(ctx, &proto.AddValCursRequest{ValCurs: &testValCurs[1]})                         // Добавить значение в бд
 	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[0].Date, Name: testValCurs[0].Name}) // Установить HandlerState
 	//работаем с состояние testValCurs[0]
-	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "http://"+host+"/", bytes.NewBuffer([]byte{}))
-	app.GetGinServer().Handler.ServeHTTP(w, req)
-	body, _ := io.ReadAll(w.Body)
-	assert.Equal(t, w.Code, http.StatusOK, string(body))
+	resp, _ := http.Get("http://" + host + "/")
+	body, _ := io.ReadAll(resp.Body)
+	assert.Equal(t, resp.StatusCode, http.StatusOK, string(body))
 	// изменить состояние на testValCurs[1]
-	w = httptest.NewRecorder()
 	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[1].Date, Name: testValCurs[1].Name}) // Установить HandlerState
-	app.GetGinServer().Handler.ServeHTTP(w, req)
-	body, _ = io.ReadAll(w.Body)
-	assert.Equal(t, w.Code, http.StatusOK, string(body))
-
+	resp, _ = http.Get("http://" + host + "/")
+	body, _ = io.ReadAll(resp.Body)
+	assert.Equal(t, resp.StatusCode, http.StatusOK, string(body))
 }
 
 // переменные для тестирования

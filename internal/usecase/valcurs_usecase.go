@@ -9,8 +9,8 @@ import (
 )
 
 type ValCursUseCase interface {
-	GetByDateAndName(ctx context.Context, time string, name string) (*entity.ValuteCurs, error)
-	DeleteByDateAndName(ctx context.Context, date string, name string) error
+	GetByDateAndName(ctx context.Context, id string, time string, name string) (*entity.ValuteCurs, error)
+	DeleteByDateAndName(ctx context.Context, id string, date string, name string) error
 	Insert(ctx context.Context, item *entity.ValuteCurs) (id string, err error)
 	Reset(ctx context.Context) error
 }
@@ -23,16 +23,16 @@ type valCursUseCase struct {
 	repository repository.ValCursRepository
 }
 
-func (uc *valCursUseCase) GetByDateAndName(ctx context.Context, date string, name string) (*entity.ValuteCurs, error) {
+func (uc *valCursUseCase) GetByDateAndName(ctx context.Context, id string, date string, name string) (*entity.ValuteCurs, error) {
 	if uc.repository == nil {
 		return nil, errors.New("ValCursUseCase.GetByDate(): Nil pointer repository")
 	}
-	item, err := uc.repository.GetByDateAndName(ctx, date, name)
+	item, err := uc.repository.GetByDateAndName(ctx, id, date, name)
 
 	// СПОРНЫЙ МОМЕНТ. т.к. в доп условиях написано про уникальность данных/ответов, предполгается что все
 	// данные будут загружаться по gRPC перед проверкой. поэтому удаляем обьект из бд по нахождению
 	if item != nil {
-		err = uc.repository.DeleteByDateAndName(ctx, date, name)
+		err = uc.repository.DeleteByDateAndName(ctx, id, date, name)
 	}
 	return item, err
 }
@@ -51,9 +51,9 @@ func (uc *valCursUseCase) Reset(ctx context.Context) error {
 	return uc.repository.Reset(ctx)
 }
 
-func (uc *valCursUseCase) DeleteByDateAndName(ctx context.Context, date string, name string) error {
+func (uc *valCursUseCase) DeleteByDateAndName(ctx context.Context, id string, date string, name string) error {
 	if uc.repository == nil {
 		return errors.New("ValCursUseCase.DeleteByDateAndName(): Nil pointer in repository")
 	}
-	return uc.repository.DeleteByDateAndName(ctx, date, name)
+	return uc.repository.DeleteByDateAndName(ctx, id, date, name)
 }

@@ -82,7 +82,7 @@ func (x *ValCurs) GetValutes() []*Valute {
 	return nil
 }
 
-// Val8ute
+// Valute
 type Valute struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -267,8 +267,8 @@ func (x *AddValCursResponse) GetMessage() string {
 // SetState
 type SetStateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Date          string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Date          string                 `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -364,8 +364,8 @@ func (x *SetStateResponse) GetMessage() string {
 // DeleteValCurs
 type DeleteValCursRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Date          string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Date          string                 `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -461,7 +461,6 @@ func (x *DeleteValCursResponse) GetMessage() string {
 // GetState
 type GetStateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -494,13 +493,6 @@ func (x *GetStateRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetStateRequest.ProtoReflect.Descriptor instead.
 func (*GetStateRequest) Descriptor() ([]byte, []int) {
 	return file_proto_valCurs_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *GetStateRequest) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
 }
 
 type GetStateResponse struct {
@@ -651,17 +643,16 @@ const file_proto_valCurs_proto_rawDesc = "" +
 	"\x12AddValCursResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"9\n" +
 	"\x0fSetStateRequest\x12\x12\n" +
-	"\x04date\x18\x01 \x01(\tR\x04date\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\",\n" +
+	"\x04date\x18\x02 \x01(\tR\x04date\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\",\n" +
 	"\x10SetStateResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\">\n" +
 	"\x14DeleteValCursRequest\x12\x12\n" +
-	"\x04date\x18\x01 \x01(\tR\x04date\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"1\n" +
+	"\x04date\x18\x02 \x01(\tR\x04date\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"1\n" +
 	"\x15DeleteValCursResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"+\n" +
-	"\x0fGetStateRequest\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\",\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\x11\n" +
+	"\x0fGetStateRequest\",\n" +
 	"\x10GetStateResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\x0e\n" +
 	"\fResetRequest\")\n" +

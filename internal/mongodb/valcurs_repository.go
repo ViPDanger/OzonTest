@@ -24,13 +24,14 @@ type valCursRepository struct {
 	collection *mongo.Collection
 }
 
-func (r *valCursRepository) GetByDateAndName(ctx context.Context, date string, name string) (*entity.ValuteCurs, error) {
+func (r *valCursRepository) GetByDateAndName(ctx context.Context, id string, date string, name string) (*entity.ValuteCurs, error) {
 	if r.collection == nil {
 		return nil, errors.New("valCursRepository.GetByDate(): nil pointer collection")
 	}
 	filter := bson.M{
-		"date": date,
-		"name": name,
+		"creatorid": id,
+		"date":      date,
+		"name":      name,
 	}
 	var result entity.ValuteCurs
 	err := r.collection.FindOne(ctx, filter).Decode(&result)
@@ -43,13 +44,14 @@ func (r *valCursRepository) GetByDateAndName(ctx context.Context, date string, n
 
 	return &result, nil
 }
-func (r *valCursRepository) DeleteByDateAndName(ctx context.Context, date string, name string) error {
+func (r *valCursRepository) DeleteByDateAndName(ctx context.Context, id string, date string, name string) error {
 	if r.collection == nil {
 		return errors.New("valCursRepository.DeleteByDate(): nil pointer collection")
 	}
 	filter := bson.M{
-		"date": date,
-		"name": name,
+		"creatorid": id,
+		"date":      date,
+		"name":      name,
 	}
 	_, err := r.collection.DeleteOne(ctx, filter)
 	if err != nil {
