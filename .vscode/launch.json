@@ -5,20 +5,28 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Go: Test All Packages",
+            "name": "Test: App",
             "type": "go",
             "request": "launch",
             "mode": "test",
             "program": "${workspaceFolder}/internal/app",
             "args": ["./..."]
         },
-      
         {
-            "name": "Main",
+            "name": "Test: Middleware",
+            "type": "go",
+            "request": "launch",
+            "mode": "test",
+            "program": "${workspaceFolder}/internal/interfaces/handlers/middleware",
+            "args": ["./..."]
+        },
+        {
+            "name": "Debug: Main",
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/cmd/main.go"
+            "program": "${workspaceFolder}/cmd/main.go",
+            "args":["--host=:5050","--mongoURI = `mongodb://127.0.0.1:27017`"],
         },
     ]
 }

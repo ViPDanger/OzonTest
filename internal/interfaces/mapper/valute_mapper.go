@@ -7,7 +7,7 @@ import (
 
 	"github.com/ViPDanger/OzonTest/internal/domain/entity"
 	"github.com/ViPDanger/OzonTest/internal/interfaces/dto"
-	"github.com/ViPDanger/OzonTest/internal/proto"
+	"github.com/ViPDanger/OzonTest/proto"
 )
 
 // ==========================Value mapper=============================

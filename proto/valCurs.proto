@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+option go_package = "./internal/proto;proto";
+
+package ValCurs;
+
+// gRPC сервис управления mock cbr.ru/scripts/XML_Daily
+service MockXMLDaily {
+  // Добавление mock данных
+  rpc AddValCurs(AddValCursRequest) returns (AddValCursResponse);
+  // Удаление mock данных
+    rpc DeleteValCurs(DeleteValCursRequest) returns (DeleteValCursResponse);
+  // Установка состояния
+  rpc SetState(SetStateRequest) returns (SetStateResponse);
+
+  // Получение текущего состояния mock-данных
+  rpc GetState(GetStateRequest) returns (GetStateResponse);
+  // Очистка всех данных (reset)
+  rpc Reset(ResetRequest) returns (ResetResponse);
+}
+
+// ValCurs
+message ValCurs {
+  string date = 1; // формат: "02.01.2006" 
+  string name = 2;
+  repeated Valute valutes = 3;
+}
+
+// Val8ute
+message Valute {
+  string id = 1;
+  int32 num_code = 2;
+  string char_code = 3;
+  int32 nominal = 4;
+  string name = 5;
+  double value = 6;
+  double vunit_rate = 7;
+}
+
+// Requests & Responses
+
+//  AddValCurs
+message AddValCursRequest {
+  ValCurs valCurs = 1;
+}
+
+message AddValCursResponse {
+  string message = 1;
+}
+
+// SetState
+message SetStateRequest {
+  string date = 1;
+  string name = 2;
+}
+
+message SetStateResponse {
+  string message = 1;
+}
+
+
+
+// DeleteValCurs
+message DeleteValCursRequest {
+  string date = 1;
+  string name = 2;
+}
+
+message DeleteValCursResponse {
+  string message = 1;
+}
+
+// GetState
+message GetStateRequest {
+  string message = 1;
+}
+message GetStateResponse {
+  string message = 1;
+}
+
+// Reset
+message ResetRequest {}
+
+message ResetResponse {
+  string message = 1;
+}

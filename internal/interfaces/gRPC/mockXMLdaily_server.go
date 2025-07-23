@@ -7,8 +7,8 @@ import (
 
 	"github.com/ViPDanger/OzonTest/internal/interfaces/handlers"
 	"github.com/ViPDanger/OzonTest/internal/interfaces/mapper"
-	"github.com/ViPDanger/OzonTest/internal/proto"
 	"github.com/ViPDanger/OzonTest/internal/usecase"
+	"github.com/ViPDanger/OzonTest/proto"
 )
 
 func NewMockXMLDailyServer(uc usecase.ValCursUseCase, h handlers.ValCursHandler) proto.MockXMLDailyServer {

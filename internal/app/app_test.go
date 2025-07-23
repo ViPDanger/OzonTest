@@ -14,29 +14,29 @@ import (
 	"testing"
 
 	"github.com/ViPDanger/OzonTest/internal/app"
-	"github.com/ViPDanger/OzonTest/internal/proto"
+	"github.com/ViPDanger/OzonTest/proto"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-const host = "localhost:8080"
+const host = "localhost:8085"
 const mongoURI = "mongodb://127.0.0.1:27017"
 const mongodbName = "xml_daily"
 const mongoUser = "admin"
 const mongoPassword = "admin"
-const grpcAdress = ":2020"
+const grpcHost = ":2025"
 
 var testValCurs []proto.ValCurs
 
 func setup(ctx context.Context) (*app.Application, proto.MockXMLDailyClient) {
-	app, err := app.Run(ctx, host, mongoURI, mongodbName, mongoUser, mongoPassword, grpcAdress)
+	app, err := app.Run(ctx, host, mongoURI, mongodbName, mongoUser, mongoPassword, grpcHost)
 	if err != nil {
 		fmt.Printf("main(): error to run app.Run() %v", err.Error())
 		return nil, nil
 	}
 
-	conn, err := grpc.NewClient(grpcAdress, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(grpcHost, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("failed to connect: %v", err)
 	}
@@ -48,6 +48,7 @@ func setup(ctx context.Context) (*app.Application, proto.MockXMLDailyClient) {
 	return app, client
 }
 
+// Тест должен вывести OK
 func TestOK(t *testing.T) {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGALRM)
 	defer cancel()
@@ -65,6 +66,7 @@ func TestOK(t *testing.T) {
 	assert.Equal(t, w.Code, http.StatusOK, string(body))
 }
 
+// Тест должен вывести StatusInternalServerError
 func TestInternalServerError(t *testing.T) {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGALRM)
 	defer cancel()
@@ -91,11 +93,13 @@ func TestSwitchState(t *testing.T) {
 	_, _ = grpcClient.AddValCurs(ctx, &proto.AddValCursRequest{ValCurs: &testValCurs[0]})                         // Добавить значение в бд
 	_, _ = grpcClient.AddValCurs(ctx, &proto.AddValCursRequest{ValCurs: &testValCurs[1]})                         // Добавить значение в бд
 	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[0].Date, Name: testValCurs[0].Name}) // Установить HandlerState
+	//работаем с состояние testValCurs[0]
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "http://"+host+"/", bytes.NewBuffer([]byte{}))
 	app.GetGinServer().Handler.ServeHTTP(w, req)
 	body, _ := io.ReadAll(w.Body)
 	assert.Equal(t, w.Code, http.StatusOK, string(body))
+	// изменить состояние на testValCurs[1]
 	w = httptest.NewRecorder()
 	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[1].Date, Name: testValCurs[1].Name}) // Установить HandlerState
 	app.GetGinServer().Handler.ServeHTTP(w, req)
@@ -104,6 +108,7 @@ func TestSwitchState(t *testing.T) {
 
 }
 
+// переменные для тестирования
 func init() {
 	testValCurs = append(make([]proto.ValCurs, 0),
 		proto.ValCurs{

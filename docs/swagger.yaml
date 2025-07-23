@@ -1,0 +1,84 @@
+consumes:
+- text/xml
+definitions:
+  dto.ValCursDTO:
+    description: The structure of the response with foreign exchange rates for the
+      specified date and name.
+    properties:
+      date:
+        description: Source Date
+        example: 02.01.2006
+        type: string
+      name:
+        description: Source name
+        example: Foreign Currency Market
+        type: string
+      valutes:
+        description: List of currencies
+        items:
+          $ref: '#/definitions/dto.ValuteDTO'
+        type: array
+    type: object
+  dto.ValuteDTO:
+    description: information about the currency and its course.
+    properties:
+      charCode:
+        description: Lamp currency code (ISO 4217)
+        example: USD
+        type: string
+      id:
+        description: Currency identifier
+        example: R01235
+        type: string
+      name:
+        description: Name of the currency
+        example: Доллар США
+        type: string
+      nominal:
+        description: Nominal
+        example: "1"
+        type: string
+      numCode:
+        description: Numerical currency code (ISO 4217)
+        example: "840"
+        type: string
+      value:
+        description: Course value
+        example: 30,9436
+        type: string
+      vunitRate:
+        description: Course per unit of currency
+        example: 30,9436
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact: {}
+  description: Мок-сервис получения курсов валют с сайта cbr.ru в XML-формате.
+  title: OzonTest
+  version: "1.0"
+paths:
+  /curs:
+    get:
+      description: Возвращает XML-список валют на заданную дату и по заданному имени
+        источника. Дата и имя берутся из внутреннего состояния, которое можно изменить
+        через gRPC SetState.
+      produces:
+      - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ValCursDTO'
+        "500":
+          description: Ошибка запроса
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Получить валютные курсы по дате и имени источника
+      tags:
+      - currency
+produces:
+- text/xml
+swagger: "2.0"
