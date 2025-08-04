@@ -13,12 +13,13 @@ import (
 
 	"github.com/ViPDanger/OzonTest/internal/app"
 	"github.com/ViPDanger/OzonTest/proto"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
 const host = "localhost:8085"
+const request = "/scripts/XML_daily.asp?date_req="
 const mongoURI = "mongodb://127.0.0.1:27017"
 const mongodbName = "xml_daily"
 const mongoUser = "admin"
@@ -54,12 +55,12 @@ func TestOK(t *testing.T) {
 	if app == nil || grpcClient == nil {
 		t.Error("Nil Pointer gin server or gRPC client")
 	}
-	_, _ = grpcClient.Reset(ctx, &proto.ResetRequest{})                                                           // Очистить бд
-	_, _ = grpcClient.AddValCurs(ctx, &proto.AddValCursRequest{ValCurs: &testValCurs[0]})                         // Добавить значение в бд
-	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[0].Date, Name: testValCurs[0].Name}) // Установить HandlerState
-	resp, _ := http.Get("http://" + host + "/")
-	body, _ := io.ReadAll(resp.Body)
-	assert.Equal(t, resp.StatusCode, http.StatusOK, string(body))
+	_, _ = grpcClient.AddMockData(ctx, &proto.AddValCursRequest{HttpStatus: http.StatusOK, ValCurs: &testValCurs[0]}) // Добавить значение в бд
+	resp, err := http.Get("http://" + host + request + "02/03/2002")
+	require.NoError(t, err)
+	body, err := io.ReadAll(resp.Body)
+	require.NoError(t, err)
+	require.Equal(t, http.StatusOK, resp.StatusCode, string(body))
 }
 
 // Тест должен вывести StatusInternalServerError
@@ -70,10 +71,11 @@ func TestInternalServerError(t *testing.T) {
 	if app == nil || grpcClient == nil {
 		t.Error("Nil Pointer gin server or gRPC client")
 	}
-	_, _ = grpcClient.Reset(ctx, &proto.ResetRequest{}) // Очистить БД
-	resp, _ := http.Get("http://" + host + "/")
-	body, _ := io.ReadAll(resp.Body)
-	assert.Equal(t, resp.StatusCode, http.StatusInternalServerError, string(body))
+	resp, err := http.Get("http://" + host + request + "02/03/2002")
+	require.NoError(t, err)
+	body, err := io.ReadAll(resp.Body)
+	require.NoError(t, err)
+	require.Equal(t, http.StatusInternalServerError, resp.StatusCode, string(body))
 }
 
 func TestSwitchState(t *testing.T) {
@@ -83,19 +85,20 @@ func TestSwitchState(t *testing.T) {
 	if app == nil || grpcClient == nil {
 		t.Error("Nil Pointer gin server or gRPC client")
 	}
-	_, _ = grpcClient.Reset(ctx, &proto.ResetRequest{})                                                           // Очистить бд
-	_, _ = grpcClient.AddValCurs(ctx, &proto.AddValCursRequest{ValCurs: &testValCurs[0]})                         // Добавить значение в бд
-	_, _ = grpcClient.AddValCurs(ctx, &proto.AddValCursRequest{ValCurs: &testValCurs[1]})                         // Добавить значение в бд
-	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[0].Date, Name: testValCurs[0].Name}) // Установить HandlerState
+	_, _ = grpcClient.AddMockData(ctx, &proto.AddValCursRequest{HttpStatus: http.StatusOK, ValCurs: &testValCurs[0]}) // Добавить значение в бд
+	_, _ = grpcClient.AddMockData(ctx, &proto.AddValCursRequest{HttpStatus: http.StatusOK, ValCurs: &testValCurs[1]}) // Добавить значение в бд
 	//работаем с состояние testValCurs[0]
-	resp, _ := http.Get("http://" + host + "/")
-	body, _ := io.ReadAll(resp.Body)
-	assert.Equal(t, resp.StatusCode, http.StatusOK, string(body))
-	// изменить состояние на testValCurs[1]
-	_, _ = grpcClient.SetState(ctx, &proto.SetStateRequest{Date: testValCurs[1].Date, Name: testValCurs[1].Name}) // Установить HandlerState
-	resp, _ = http.Get("http://" + host + "/")
-	body, _ = io.ReadAll(resp.Body)
-	assert.Equal(t, resp.StatusCode, http.StatusOK, string(body))
+	resp, err := http.Get("http://" + host + request + "02/03/2002")
+	require.NoError(t, err)
+	body, err := io.ReadAll(resp.Body)
+	require.NoError(t, err)
+	require.Equal(t, http.StatusOK, resp.StatusCode, string(body))
+	// Cостояние на testValCurs[1]
+	resp, err = http.Get("http://" + host + request + "30/04/2005")
+	require.NoError(t, err)
+	body, err = io.ReadAll(resp.Body)
+	require.NoError(t, err)
+	require.Equal(t, http.StatusOK, resp.StatusCode, string(body))
 }
 
 // переменные для тестирования

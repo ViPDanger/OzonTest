@@ -7,16 +7,10 @@ package ValCurs;
 // gRPC сервис управления mock cbr.ru/scripts/XML_Daily
 service MockXMLDaily {
   // Добавление mock данных
-  rpc AddValCurs(AddValCursRequest) returns (AddValCursResponse);
+  rpc AddMockData(AddValCursRequest) returns (AddValCursResponse);
   // Удаление mock данных
-    rpc DeleteValCurs(DeleteValCursRequest) returns (DeleteValCursResponse);
-  // Установка состояния
-  rpc SetState(SetStateRequest) returns (SetStateResponse);
-
-  // Получение текущего состояния mock-данных
-  rpc GetState(GetStateRequest) returns (GetStateResponse);
+    rpc DeleteMockData(DeleteValCursRequest) returns (DeleteValCursResponse);
   // Очистка всех данных (reset)
-  rpc Reset(ResetRequest) returns (ResetResponse);
 }
 
 // ValCurs
@@ -41,44 +35,19 @@ message Valute {
 
 //  AddValCurs
 message AddValCursRequest {
-  ValCurs valCurs = 1;
+  int32 httpStatus = 1; 
+  ValCurs valCurs = 2;
 }
 
 message AddValCursResponse {
   string message = 1;
 }
 
-// SetState
-message SetStateRequest {
-  string date = 2;
-  string name = 3;
-}
-
-message SetStateResponse {
-  string message = 1;
-}
-
-
-
 // DeleteValCurs
 message DeleteValCursRequest {
-  string date = 2;
-  string name = 3;
+  string date = 1;
 }
 
 message DeleteValCursResponse {
-  string message = 1;
-}
-
-// GetState
-message GetStateRequest {}
-message GetStateResponse {
-  string message = 1;
-}
-
-// Reset
-message ResetRequest {}
-
-message ResetResponse {
   string message = 1;
 }

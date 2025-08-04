@@ -1,10 +1,9 @@
 package entity
 
 type ValuteCurs struct {
-	CreatorID string
-	Date      string
-	Name      string
-	Valutes   []Valute
+	Date    string
+	Name    string
+	Valutes []Valute
 }
 
 type Valute struct {
@@ -15,4 +14,10 @@ type Valute struct {
 	Name      string
 	Value     float64
 	VunitRate float64
+}
+
+type XMLDailyMockResponse struct {
+	CreatorID string
+	Code      int
+	ValuteCurs
 }

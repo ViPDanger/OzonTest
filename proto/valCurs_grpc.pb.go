@@ -19,11 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MockXMLDaily_AddValCurs_FullMethodName    = "/ValCurs.MockXMLDaily/AddValCurs"
-	MockXMLDaily_DeleteValCurs_FullMethodName = "/ValCurs.MockXMLDaily/DeleteValCurs"
-	MockXMLDaily_SetState_FullMethodName      = "/ValCurs.MockXMLDaily/SetState"
-	MockXMLDaily_GetState_FullMethodName      = "/ValCurs.MockXMLDaily/GetState"
-	MockXMLDaily_Reset_FullMethodName         = "/ValCurs.MockXMLDaily/Reset"
+	MockXMLDaily_AddMockData_FullMethodName    = "/ValCurs.MockXMLDaily/AddMockData"
+	MockXMLDaily_DeleteMockData_FullMethodName = "/ValCurs.MockXMLDaily/DeleteMockData"
 )
 
 // MockXMLDailyClient is the client API for MockXMLDaily service.
@@ -33,15 +30,9 @@ const (
 // gRPC сервис управления mock cbr.ru/scripts/XML_Daily
 type MockXMLDailyClient interface {
 	// Добавление mock данных
-	AddValCurs(ctx context.Context, in *AddValCursRequest, opts ...grpc.CallOption) (*AddValCursResponse, error)
+	AddMockData(ctx context.Context, in *AddValCursRequest, opts ...grpc.CallOption) (*AddValCursResponse, error)
 	// Удаление mock данных
-	DeleteValCurs(ctx context.Context, in *DeleteValCursRequest, opts ...grpc.CallOption) (*DeleteValCursResponse, error)
-	// Установка состояния
-	SetState(ctx context.Context, in *SetStateRequest, opts ...grpc.CallOption) (*SetStateResponse, error)
-	// Получение текущего состояния mock-данных
-	GetState(ctx context.Context, in *GetStateRequest, opts ...grpc.CallOption) (*GetStateResponse, error)
-	// Очистка всех данных (reset)
-	Reset(ctx context.Context, in *ResetRequest, opts ...grpc.CallOption) (*ResetResponse, error)
+	DeleteMockData(ctx context.Context, in *DeleteValCursRequest, opts ...grpc.CallOption) (*DeleteValCursResponse, error)
 }
 
 type mockXMLDailyClient struct {
@@ -52,50 +43,20 @@ func NewMockXMLDailyClient(cc grpc.ClientConnInterface) MockXMLDailyClient {
 	return &mockXMLDailyClient{cc}
 }
 
-func (c *mockXMLDailyClient) AddValCurs(ctx context.Context, in *AddValCursRequest, opts ...grpc.CallOption) (*AddValCursResponse, error) {
+func (c *mockXMLDailyClient) AddMockData(ctx context.Context, in *AddValCursRequest, opts ...grpc.CallOption) (*AddValCursResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddValCursResponse)
-	err := c.cc.Invoke(ctx, MockXMLDaily_AddValCurs_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, MockXMLDaily_AddMockData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mockXMLDailyClient) DeleteValCurs(ctx context.Context, in *DeleteValCursRequest, opts ...grpc.CallOption) (*DeleteValCursResponse, error) {
+func (c *mockXMLDailyClient) DeleteMockData(ctx context.Context, in *DeleteValCursRequest, opts ...grpc.CallOption) (*DeleteValCursResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteValCursResponse)
-	err := c.cc.Invoke(ctx, MockXMLDaily_DeleteValCurs_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mockXMLDailyClient) SetState(ctx context.Context, in *SetStateRequest, opts ...grpc.CallOption) (*SetStateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetStateResponse)
-	err := c.cc.Invoke(ctx, MockXMLDaily_SetState_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mockXMLDailyClient) GetState(ctx context.Context, in *GetStateRequest, opts ...grpc.CallOption) (*GetStateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStateResponse)
-	err := c.cc.Invoke(ctx, MockXMLDaily_GetState_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mockXMLDailyClient) Reset(ctx context.Context, in *ResetRequest, opts ...grpc.CallOption) (*ResetResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ResetResponse)
-	err := c.cc.Invoke(ctx, MockXMLDaily_Reset_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, MockXMLDaily_DeleteMockData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -109,15 +70,9 @@ func (c *mockXMLDailyClient) Reset(ctx context.Context, in *ResetRequest, opts .
 // gRPC сервис управления mock cbr.ru/scripts/XML_Daily
 type MockXMLDailyServer interface {
 	// Добавление mock данных
-	AddValCurs(context.Context, *AddValCursRequest) (*AddValCursResponse, error)
+	AddMockData(context.Context, *AddValCursRequest) (*AddValCursResponse, error)
 	// Удаление mock данных
-	DeleteValCurs(context.Context, *DeleteValCursRequest) (*DeleteValCursResponse, error)
-	// Установка состояния
-	SetState(context.Context, *SetStateRequest) (*SetStateResponse, error)
-	// Получение текущего состояния mock-данных
-	GetState(context.Context, *GetStateRequest) (*GetStateResponse, error)
-	// Очистка всех данных (reset)
-	Reset(context.Context, *ResetRequest) (*ResetResponse, error)
+	DeleteMockData(context.Context, *DeleteValCursRequest) (*DeleteValCursResponse, error)
 	mustEmbedUnimplementedMockXMLDailyServer()
 }
 
@@ -128,20 +83,11 @@ type MockXMLDailyServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMockXMLDailyServer struct{}
 
-func (UnimplementedMockXMLDailyServer) AddValCurs(context.Context, *AddValCursRequest) (*AddValCursResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddValCurs not implemented")
+func (UnimplementedMockXMLDailyServer) AddMockData(context.Context, *AddValCursRequest) (*AddValCursResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMockData not implemented")
 }
-func (UnimplementedMockXMLDailyServer) DeleteValCurs(context.Context, *DeleteValCursRequest) (*DeleteValCursResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteValCurs not implemented")
-}
-func (UnimplementedMockXMLDailyServer) SetState(context.Context, *SetStateRequest) (*SetStateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetState not implemented")
-}
-func (UnimplementedMockXMLDailyServer) GetState(context.Context, *GetStateRequest) (*GetStateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetState not implemented")
-}
-func (UnimplementedMockXMLDailyServer) Reset(context.Context, *ResetRequest) (*ResetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Reset not implemented")
+func (UnimplementedMockXMLDailyServer) DeleteMockData(context.Context, *DeleteValCursRequest) (*DeleteValCursResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMockData not implemented")
 }
 func (UnimplementedMockXMLDailyServer) mustEmbedUnimplementedMockXMLDailyServer() {}
 func (UnimplementedMockXMLDailyServer) testEmbeddedByValue()                      {}
@@ -164,92 +110,38 @@ func RegisterMockXMLDailyServer(s grpc.ServiceRegistrar, srv MockXMLDailyServer)
 	s.RegisterService(&MockXMLDaily_ServiceDesc, srv)
 }
 
-func _MockXMLDaily_AddValCurs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MockXMLDaily_AddMockData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddValCursRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MockXMLDailyServer).AddValCurs(ctx, in)
+		return srv.(MockXMLDailyServer).AddMockData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MockXMLDaily_AddValCurs_FullMethodName,
+		FullMethod: MockXMLDaily_AddMockData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MockXMLDailyServer).AddValCurs(ctx, req.(*AddValCursRequest))
+		return srv.(MockXMLDailyServer).AddMockData(ctx, req.(*AddValCursRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MockXMLDaily_DeleteValCurs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MockXMLDaily_DeleteMockData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteValCursRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MockXMLDailyServer).DeleteValCurs(ctx, in)
+		return srv.(MockXMLDailyServer).DeleteMockData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MockXMLDaily_DeleteValCurs_FullMethodName,
+		FullMethod: MockXMLDaily_DeleteMockData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MockXMLDailyServer).DeleteValCurs(ctx, req.(*DeleteValCursRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MockXMLDaily_SetState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetStateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MockXMLDailyServer).SetState(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MockXMLDaily_SetState_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MockXMLDailyServer).SetState(ctx, req.(*SetStateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MockXMLDaily_GetState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MockXMLDailyServer).GetState(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MockXMLDaily_GetState_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MockXMLDailyServer).GetState(ctx, req.(*GetStateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MockXMLDaily_Reset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResetRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MockXMLDailyServer).Reset(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MockXMLDaily_Reset_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MockXMLDailyServer).Reset(ctx, req.(*ResetRequest))
+		return srv.(MockXMLDailyServer).DeleteMockData(ctx, req.(*DeleteValCursRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -262,24 +154,12 @@ var MockXMLDaily_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MockXMLDailyServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddValCurs",
-			Handler:    _MockXMLDaily_AddValCurs_Handler,
+			MethodName: "AddMockData",
+			Handler:    _MockXMLDaily_AddMockData_Handler,
 		},
 		{
-			MethodName: "DeleteValCurs",
-			Handler:    _MockXMLDaily_DeleteValCurs_Handler,
-		},
-		{
-			MethodName: "SetState",
-			Handler:    _MockXMLDaily_SetState_Handler,
-		},
-		{
-			MethodName: "GetState",
-			Handler:    _MockXMLDaily_GetState_Handler,
-		},
-		{
-			MethodName: "Reset",
-			Handler:    _MockXMLDaily_Reset_Handler,
+			MethodName: "DeleteMockData",
+			Handler:    _MockXMLDaily_DeleteMockData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

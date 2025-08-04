@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func NewValCursRepository(db *mongo.Database) repository.ValCursRepository {
+func NewValCursRepository(db *mongo.Database) repository.XMLDailyMockResponseRepository {
 	r := valCursRepository{}
 	if db != nil {
 		r.collection = db.Collection("ValCurs")
@@ -24,16 +24,14 @@ type valCursRepository struct {
 	collection *mongo.Collection
 }
 
-func (r *valCursRepository) GetByDateAndName(ctx context.Context, id string, date string, name string) (*entity.ValuteCurs, error) {
+func (r *valCursRepository) GetByDate(ctx context.Context, date string) (*entity.XMLDailyMockResponse, error) {
 	if r.collection == nil {
 		return nil, errors.New("valCursRepository.GetByDate(): nil pointer collection")
 	}
 	filter := bson.M{
-		"creatorid": id,
-		"date":      date,
-		"name":      name,
+		"valutecurs.date": date,
 	}
-	var result entity.ValuteCurs
+	var result entity.XMLDailyMockResponse
 	err := r.collection.FindOne(ctx, filter).Decode(&result)
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
@@ -44,14 +42,12 @@ func (r *valCursRepository) GetByDateAndName(ctx context.Context, id string, dat
 
 	return &result, nil
 }
-func (r *valCursRepository) DeleteByDateAndName(ctx context.Context, id string, date string, name string) error {
+func (r *valCursRepository) DeleteByDate(ctx context.Context, date string) error {
 	if r.collection == nil {
 		return errors.New("valCursRepository.DeleteByDate(): nil pointer collection")
 	}
 	filter := bson.M{
-		"creatorid": id,
-		"date":      date,
-		"name":      name,
+		"valutecurs.date": date,
 	}
 	_, err := r.collection.DeleteOne(ctx, filter)
 	if err != nil {
@@ -63,7 +59,7 @@ func (r *valCursRepository) DeleteByDateAndName(ctx context.Context, id string, 
 
 	return nil
 }
-func (r *valCursRepository) Insert(ctx context.Context, item *entity.ValuteCurs) (id string, err error) {
+func (r *valCursRepository) Insert(ctx context.Context, item *entity.XMLDailyMockResponse) (id string, err error) {
 	if r.collection == nil {
 		return "", errors.New("valCursRepository.Insert(): nil pointer collection")
 	}
@@ -71,14 +67,13 @@ func (r *valCursRepository) Insert(ctx context.Context, item *entity.ValuteCurs)
 	if err != nil {
 		return "", err
 	}
-
 	oid, ok := res.InsertedID.(primitive.ObjectID)
 	if !ok {
 		return "", errors.New("valCursRepository.Insert(): failed to convert inserted ID to ObjectID")
 	}
-
 	return oid.Hex(), nil
 }
+
 func (r *valCursRepository) Reset(ctx context.Context) (err error) {
 	if r.collection == nil {
 		return errors.New("valCursRepository.Reset(): nil pointer collection")

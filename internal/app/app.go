@@ -63,6 +63,7 @@ func Run(ctx context.Context, host string, mongoURI string, database string, use
 		if err == nil {
 			break
 		}
+		fmt.Println("Failed to connect to MongoDB, trying again")
 		time.Sleep(MongoRetryTime)
 	}
 
@@ -81,7 +82,7 @@ func Run(ctx context.Context, host string, mongoURI string, database string, use
 		middleware.NewTimeouter(TimeouterMaxTime).TimeoutHandler)
 	usecase := usecase.NewValCursUseCase(mongodb.NewValCursRepository(db))
 	handler := handlers.NewValCursHandler(usecase)
-	r.GET("/", handler.GetByDateAndName)
+	r.GET("/scripts/XML_daily.asp", handler.GetByDateAndName)
 	//===============gRPC server setup=============
 	grpcServer := grpc.NewServer()
 	proto.RegisterMockXMLDailyServer(

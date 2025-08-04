@@ -88,3 +88,5 @@ func ValCursProtoToEntity(p *proto.ValCurs) entity.ValuteCurs {
 		Valutes: valutes,
 	}
 }
+
+func XMLDailyResponseToEntity(p *proto.AddValCursRequest) {}
